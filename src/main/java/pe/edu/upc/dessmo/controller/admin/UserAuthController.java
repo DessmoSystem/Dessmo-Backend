@@ -161,7 +161,7 @@ public class UserAuthController {
 
         context.setVariables(model);
 
-        String html_template = templateEngine.process("userallow-mailtemplate", context);
+        String html_template = templateEngine.process("userdeny-mailtemplate", context);
 
         helper.setSubject(asunto);
         helper.setText(html_template, true);

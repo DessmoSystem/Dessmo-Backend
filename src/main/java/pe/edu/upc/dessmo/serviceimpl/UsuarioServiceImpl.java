@@ -36,7 +36,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public Optional<Usuario> BuscarUsuario_By_UtilityToken(Long id_utilitytoken) {
+    public Optional<Usuario> BuscarUsuario_By_IDUtilityToken(Long id_utilitytoken) {
         return data.findByIdUtilitytoken(id_utilitytoken);
     }
 

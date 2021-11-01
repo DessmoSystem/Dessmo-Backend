@@ -15,7 +15,7 @@ public interface IUsuarioService {
 
     Optional<Usuario> BuscarUsuario_By_UsernameOrEmail(String username_or_email);
 
-    Optional<Usuario> BuscarUsuario_By_UtilityToken(Long id_utilitytoken);
+    Optional<Usuario> BuscarUsuario_By_IDUtilityToken(Long id_utilitytoken);
 
     Set<Usuario> BuscarUsuarios_By_EstadoUsuario(String estado_usuario);
 
