@@ -67,13 +67,14 @@ public class SignupAdminController {
     final
     TemplateEngine templateEngine;
 
-    Code_SignupValidations code_signupValidations;
-
     @Value("${front.baseurl}")
     private String baseurl;
 
-    @Value("${image.mail.url}")
-    private String logomail_url;
+    @Value("${image.logo.url}")
+    private String img_logo;
+
+    @Value("${image.check.url}")
+    private String img_check;
 
     public SignupAdminController(IUsuarioService usuarioService, IUtilityTokenService utilityTokenService,
                                  JavaMailSender mailSender, IRolService rolService,
@@ -174,6 +175,10 @@ public class SignupAdminController {
                 if (rol_data.isPresent()) {
                     Usuario admin = admin_data.get();
 
+                    admin.setNombreUsuario(signupAdminRequest.getNombreUsuario());
+                    admin.setApellidoUsuario(signupAdminRequest.getApellidoUsuario());
+                    admin.setPasswordUsuario(passwordEncoder.encode(signupAdminRequest.getPasswordUsuario()));
+
                     //Asignando Rol: Administrador
                     Code_SetUserRol.SetUserRol(admin, rol_data);
 
@@ -211,7 +216,7 @@ public class SignupAdminController {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        helper.setFrom("fenosys.assistant@gmail.com", "Dessmo Support");
+        helper.setFrom("dessmosystem@gmail.com", "Dessmo Support");
         helper.setTo(email);
 
         String asunto = "Solicitud de Registro de Administrador";
@@ -225,8 +230,8 @@ public class SignupAdminController {
             Map<String, Object> model = new HashMap<>();
             model.put("username", admin.getUsernameUsuario());
             model.put("url", url);
-            model.put("logomail_Url", logomail_url);
-            model.put("frontend_baseUrl", baseurl);
+            model.put("img_logo", img_logo);
+            model.put("img_check", img_check);
 
             context.setVariables(model);
 
