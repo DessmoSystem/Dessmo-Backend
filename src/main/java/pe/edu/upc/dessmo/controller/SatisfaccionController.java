@@ -29,7 +29,7 @@ public class SatisfaccionController {
         this.satisfaccionService = satisfaccionService;
     }
 
-    @GetMapping("/user/{id_user}/satisfaccion/save")
+    @PostMapping("/user/{id_user}/satisfaccion/save")
     public ResponseEntity<?> GuardarSatisfaccionUsuario(@PathVariable("id_user") Long id_user,
                                                         @RequestBody SatisfaccionRequest satisfaccionRequest) {
 
