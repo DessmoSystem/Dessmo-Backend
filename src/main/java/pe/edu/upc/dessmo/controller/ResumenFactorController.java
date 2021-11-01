@@ -1,4 +1,4 @@
-package pe.edu.upc.dessmo.controller.util;
+package pe.edu.upc.dessmo.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

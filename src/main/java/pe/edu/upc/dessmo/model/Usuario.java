@@ -48,6 +48,9 @@ public class Usuario implements Serializable {
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "usuarioUtilityToken")
     private Set<UtilityToken> utilitytokensUsuario;
 
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "usuarioSatisfaccion")
+    private Set<Satisfaccion> satisfaccionesUsuario;
+
     @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "usuarioImagen")
     private Imagen imagenUsuario;
 
@@ -146,6 +149,14 @@ public class Usuario implements Serializable {
 
     public void setUtilitytokensUsuario(Set<UtilityToken> utilitytokensUsuario) {
         this.utilitytokensUsuario = utilitytokensUsuario;
+    }
+
+    public Set<Satisfaccion> getSatisfaccionesUsuario() {
+        return satisfaccionesUsuario;
+    }
+
+    public void setSatisfaccionesUsuario(Set<Satisfaccion> satisfaccionesUsuario) {
+        this.satisfaccionesUsuario = satisfaccionesUsuario;
     }
 
     public Imagen getImagenUsuario() {
