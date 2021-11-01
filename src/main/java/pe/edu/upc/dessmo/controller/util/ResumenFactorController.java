@@ -10,8 +10,6 @@ import pe.edu.upc.dessmo.dto.response.MotivoAbandonoResponse;
 import pe.edu.upc.dessmo.model.Data;
 import pe.edu.upc.dessmo.service.IDataService;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Set;
 
@@ -59,7 +57,7 @@ public class ResumenFactorController {
         int factor_responsabilidadfamiliar = data_list_factor_responsabilidadfamiliar.size();
         double porcentaje_rf = ((double) factor_responsabilidadfamiliar / (double) total_data) * 100;
 
-        NumberFormat nf= NumberFormat.getInstance();
+        NumberFormat nf = NumberFormat.getInstance();
         nf.setMaximumFractionDigits(2);
 
         MotivoAbandonoResponse motivoAbandonoResponse = new MotivoAbandonoResponse(
