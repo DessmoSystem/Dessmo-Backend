@@ -24,6 +24,16 @@ public class DataServiceImpl implements IDataService {
     }
 
     @Override
+    public Set<Data> MostrarData() {
+        return dao.findData();
+    }
+
+    @Override
+    public Set<Data> BuscarData_By_MotivoAbandono(String motivo_abandono) {
+        return dao.findDataByMotivoAbandono(motivo_abandono);
+    }
+
+    @Override
     public void GuardarData(MultipartFile archivo, Usuario admin) {
         try {
             Set<Data> lote_data = ExcelHelper.ExcelToData(archivo.getInputStream(), admin);
