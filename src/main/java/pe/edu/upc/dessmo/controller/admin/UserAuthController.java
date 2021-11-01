@@ -1,11 +1,14 @@
 package pe.edu.upc.dessmo.controller.admin;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 import pe.edu.upc.dessmo.dto.response.UserAuthResponse;
 import pe.edu.upc.dessmo.dto.response.general.MessageResponse;
 import pe.edu.upc.dessmo.model.Usuario;
@@ -15,9 +18,7 @@ import pe.edu.upc.dessmo.service.IUsuarioService;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -33,10 +34,27 @@ public class UserAuthController {
     final
     JavaMailSender mailSender;
 
-    public UserAuthController(IUsuarioService usuarioService, IImagenService imagenService, JavaMailSender mailSender) {
+    final
+    TemplateEngine templateEngine;
+
+    @Value("${front.baseurl}")
+    private String baseurl;
+
+    @Value("${image.logo.url}")
+    private String img_logo;
+
+    @Value("${image.check.url}")
+    private String img_check;
+
+    @Value("${image.cross.url}")
+    private String img_cross;
+
+    public UserAuthController(IUsuarioService usuarioService, IImagenService imagenService, JavaMailSender mailSender,
+                              TemplateEngine templateEngine) {
         this.usuarioService = usuarioService;
         this.imagenService = imagenService;
         this.mailSender = mailSender;
+        this.templateEngine = templateEngine;
     }
 
     @GetMapping("/usuarios/display/verify")
@@ -104,17 +122,23 @@ public class UserAuthController {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        helper.setFrom("fenosys.assistant@gmail.com", "Dessmo Support");
+        helper.setFrom("dessmosystem@gmail.com", "Dessmo Support");
         helper.setTo(email);
 
         String asunto = "Autorización de ingreso a Dessmo";
 
-        String contenido =
-                "<h2>Hola,</h1>" +
-                        "<p>Se autorizó tu solicitud de registro. Ya puedes ingresar al sistema sin problemas.</p>";
+        Context context = new Context();
+        Map<String, Object> model = new HashMap<>();
+        model.put("url", baseurl + "/signin/administrador");
+        model.put("img_logo", img_logo);
+        model.put("img_check", img_check);
+
+        context.setVariables(model);
+
+        String html_template = templateEngine.process("userallow-mailtemplate", context);
 
         helper.setSubject(asunto);
-        helper.setText(contenido, true);
+        helper.setText(html_template, true);
 
         mailSender.send(message);
     }
@@ -124,17 +148,23 @@ public class UserAuthController {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        helper.setFrom("fenosys.assistant@gmail.com", "Dessmo Support");
+        helper.setFrom("dessmosystem@gmail.com", "Dessmo Support");
         helper.setTo(email);
 
         String asunto = "Autorización de ingreso a Dessmo";
 
-        String contenido =
-                "<h2>Hola,</h1>" +
-                        "<p>Se rechazó tu solicitud de registro.</p>";
+        Context context = new Context();
+        Map<String, Object> model = new HashMap<>();
+        model.put("url", baseurl);
+        model.put("img_logo", img_logo);
+        model.put("img_cross", img_cross);
+
+        context.setVariables(model);
+
+        String html_template = templateEngine.process("userallow-mailtemplate", context);
 
         helper.setSubject(asunto);
-        helper.setText(contenido, true);
+        helper.setText(html_template, true);
 
         mailSender.send(message);
     }
