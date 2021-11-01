@@ -7,8 +7,6 @@ import java.util.Set;
 
 public interface IUsuarioService {
 
-    //UTU: Utility Tokens de Usuario
-
     Optional<Usuario> BuscarUsuario_By_IDUsuario(Long id_usuario);
 
     Optional<Usuario> BuscarUsuario_By_EmailUsuario(String email_usuario);

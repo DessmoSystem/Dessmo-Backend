@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2021. Developed by Diego Campos Sandoval.
- */
-
 package pe.edu.upc.dessmo.controller.usuario;
 
 import net.bytebuddy.utility.RandomString;
