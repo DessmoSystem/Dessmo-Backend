@@ -18,7 +18,6 @@ import pe.edu.upc.dessmo.serviceimpl.UserDetailsImpl;
 
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/api")
 @CrossOrigin

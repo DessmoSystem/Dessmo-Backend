@@ -18,6 +18,11 @@ public class UserDetailsImpl implements UserDetails {
 
     //Atributos
     private Long idUsuario;
+
+    private String nombreUsuario;
+
+    private String apellidoUsuario;
+
     private String usernameUsuario;
 
     @JsonIgnore
@@ -34,9 +39,12 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl() {
     }
 
-    public UserDetailsImpl(Long idUsuario, String usernameUsuario, String passwordUsuario, ImagenResponse fotoUsuario,
-                           String estadoUsuario, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(Long idUsuario, String nombreUsuario, String apellidoUsuario, String usernameUsuario,
+                           String passwordUsuario, ImagenResponse fotoUsuario, String estadoUsuario,
+                           Collection<? extends GrantedAuthority> authorities) {
         this.idUsuario = idUsuario;
+        this.nombreUsuario = nombreUsuario;
+        this.apellidoUsuario = apellidoUsuario;
         this.usernameUsuario = usernameUsuario;
         this.passwordUsuario = passwordUsuario;
         this.fotoUsuario = fotoUsuario;
@@ -51,6 +59,8 @@ public class UserDetailsImpl implements UserDetails {
 
         return new UserDetailsImpl(
                 usuario.getIdUsuario(),
+                usuario.getNombreUsuario(),
+                usuario.getApellidoUsuario(),
                 usuario.getUsernameUsuario(),
                 usuario.getPasswordUsuario(),
                 new ImagenResponse(
@@ -68,6 +78,14 @@ public class UserDetailsImpl implements UserDetails {
 
     public Long getIdUsuario() {
         return idUsuario;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public String getApellidoUsuario() {
+        return apellidoUsuario;
     }
 
     @Override

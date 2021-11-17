@@ -12,6 +12,7 @@ public class JwtResponse {
     private String token;
     private Long idUsuario;
     private String usernameUsuario;
+    private String nombreUsuario;
     private ImagenResponse fotoUsuario;
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -19,11 +20,12 @@ public class JwtResponse {
     public JwtResponse() {
     }
 
-    public JwtResponse(String token, Long idUsuario, String usernameUsuario, ImagenResponse fotoUsuario,
+    public JwtResponse(String token, Long idUsuario, String usernameUsuario, String nombreUsuario, ImagenResponse fotoUsuario,
                        Collection<? extends GrantedAuthority> authorities) {
         this.token = token;
         this.idUsuario = idUsuario;
         this.usernameUsuario = usernameUsuario;
+        this.nombreUsuario = nombreUsuario;
         this.fotoUsuario = fotoUsuario;
         this.authorities = authorities;
     }
@@ -59,6 +61,14 @@ public class JwtResponse {
 
     public void setUsernameUsuario(String usernameUsuario) {
         this.usernameUsuario = usernameUsuario;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     public ImagenResponse getFotoUsuario() {
