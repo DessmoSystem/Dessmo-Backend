@@ -104,11 +104,11 @@ public class SigninSuperAdminController {
                     return new ResponseEntity<>(new JwtResponse(
                             jwt,
                             userDetails.getIdUsuario(),
+                            null,
                             userDetails.getUsername(),
                             userDetails.getFotoUsuario(),
                             userDetails.getAuthorities()
                     ), HttpStatus.OK);
-
                 } else {
                     return new ResponseEntity<>(new MessageResponse("El Usuario no se encuentra habilitado para acceder al sistema."),
                             HttpStatus.BAD_REQUEST);

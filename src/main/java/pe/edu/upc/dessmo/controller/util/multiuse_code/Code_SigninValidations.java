@@ -23,6 +23,7 @@ public class Code_SigninValidations {
                 return new ResponseEntity<>(new JwtResponse(
                         jwt,
                         userDetails.getIdUsuario(),
+                        userDetails.getNombreUsuario() + userDetails.getApellidoUsuario(),
                         userDetails.getUsername(),
                         userDetails.getFotoUsuario(),
                         userDetails.getAuthorities()
